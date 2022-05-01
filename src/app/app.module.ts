@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+
+
 // import module
 import { ElModule } from 'element-angular'
 
@@ -23,6 +25,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TopContainerComponent } from './top-container/top-container.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MetaDataContainerComponent } from './meta-data-container/meta-data-container.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     LeftContainerComponent,
     CommonTableComponent,
     MenuListComponent,
-    TopContainerComponent
+    TopContainerComponent,
+    MetaDataContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDatepickerModule,
-    MatBadgeModule
+    MatBadgeModule,
     // MatCardHarness
   ],
   providers: [],
