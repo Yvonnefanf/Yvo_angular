@@ -1,0 +1,55 @@
+<div class="project-panel">
+  <div class="title">DVI</div>
+  <mat-form-field class="project-panel-input" appearance="fill">
+    <mat-label>Model Path</mat-label>
+    <input matInput placeholder="Model Path..." value="/Users/zhangyifan/Downloads/toy_model/resnet18_cifar10/">
+  </mat-form-field>
+  <mat-form-field class="project-panel-input" appearance="fill">
+    <mat-label>Resolution</mat-label>
+    <input matInput placeholder="Resolution..." value="">
+  </mat-form-field>
+
+  <div class="next-previout-btn">
+    <button mat-raised-button>Previous</button>
+    <button mat-raised-button>Next</button>
+  </div>
+  <div class="jump-op">
+    <mat-form-field class="iteration-input" appearance="fill">
+      <mat-label>Iteration</mat-label>
+      <input matInput placeholder="Iteration..." value="">
+    </mat-form-field>
+    <button mat-raised-button>Jump</button>
+  </div>
+  <div class="table-container">
+    <table>
+      <caption>Visualization Confidence</caption>
+      <tr>
+        <td></td>
+        <td>train</td>
+        <td>test</td>
+      </tr>
+      <tr>
+        <td>nn</td>
+        <td><span class="nn_train_15">NA</span> </td>
+        <td><span class="nn_test_15">NA</span></td>
+      </tr>
+      <tr>
+        <td>boundary</td>
+        <td><span class="bound_train_15">NA</span></td>
+        <td><span class="bound_test_15">NA</span></td>
+      </tr>
+      <tr>
+        <td>PPR</td>
+        <td><span class="inv_acc_train">NA</span> </td>
+        <td> <span class="inv_acc_test">NA</span></td>
+      </tr>
+      <tr>
+        <td>CCR</td>
+        <td><span class="inv_conf_train">NA</span></td>
+        <td><span class="inv_conf_test">NA</span></td>
+      </tr>
+    </table>
+    <p>Task Model Accuracy:</p>
+    <p>train: <span class="acc_train">NA</span> test: <span class="acc_test">NA</span></p>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="data-panel">
+  <div class="title">Data</div>
+  <div class="container">
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite food</mat-label>
+      <mat-select [(value)]="tensorSelected">
+        <mat-option *ngFor="let tensor of tensorOptions" [value]="tensor.value">
+          {{tensor.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div style="display: flex;">
+      <mat-form-field appearance="fill" style="width: 130px;">
+        <mat-label>Favorite food</mat-label>
+        <mat-select [(value)]="labelBySelected">
+          <mat-option *ngFor="let label of labelByOptions" [value]="label.value">
+            {{label.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 170px; margin-left: 10px;">
+        <mat-label>Favorite food</mat-label>
+        <mat-select [(value)]="colorBySelected">
+          <mat-option *ngFor="let color of colorByOptions" [value]="color.value">
+            {{color.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button style="width: 310px;" mat-raised-button color="primary">load</button>
+    <!-- <mat-checkbox class="example-margin" [(ngModel)]="SphereizeDatachecked">Sphereize data</mat-checkbox> -->
+  </div>
+</div>

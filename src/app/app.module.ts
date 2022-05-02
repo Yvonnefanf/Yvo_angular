@@ -26,6 +26,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TopContainerComponent } from './top-container/top-container.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MetaDataContainerComponent } from './meta-data-container/meta-data-container.component';
+import { DataPanelComponent } from './data-panel/data-panel.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ProjectPanelComponent } from './project-panel/project-panel.component';
+import { RightContainerComponent } from './right-container/right-container.component';
+import { MiddleContainerComponent } from './middle-container/middle-container.component';
+import { PanelMenuBarComponent } from './panel-menu-bar/panel-menu-bar.component';
+import { InspectorPanelComponent } from './inspector-panel/inspector-panel.component';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +45,13 @@ import { MetaDataContainerComponent } from './meta-data-container/meta-data-cont
     CommonTableComponent,
     MenuListComponent,
     TopContainerComponent,
-    MetaDataContainerComponent
+    MetaDataContainerComponent,
+    DataPanelComponent,
+    ProjectPanelComponent,
+    RightContainerComponent,
+    MiddleContainerComponent,
+    PanelMenuBarComponent,
+    InspectorPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +65,10 @@ import { MetaDataContainerComponent } from './meta-data-container/meta-data-cont
     MatToolbarModule,
     MatDatepickerModule,
     MatBadgeModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule
     // MatCardHarness
   ],
   providers: [],
