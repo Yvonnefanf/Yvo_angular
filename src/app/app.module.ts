@@ -37,6 +37,7 @@ import { PanelMenuBarComponent } from './panel-menu-bar/panel-menu-bar.component
 import { InspectorPanelComponent } from './inspector-panel/inspector-panel.component';
 import {MatInputModule} from '@angular/material/input';
 import { ScatterPlotVisualizerComponent } from './scatter-plot-visualizer/scatter-plot-visualizer.component';
+
 @NgModule({
   declarations: [
     AppComponent,

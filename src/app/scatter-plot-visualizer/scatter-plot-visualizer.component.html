@@ -1,1 +1,26 @@
+<div class="panel-manubar">
+  <div class="op-container">
+    <div class="op-item" ng-click="">
+      <mat-icon>settings_overscan</mat-icon>
+    </div>
+    <div class="op-item">
+      <mat-icon>exposure</mat-icon>
+    </div>
+    <div class="op-item">
+      <mat-icon>bedtime</mat-icon>
+    </div>
+    <div class="op-item" title="hidden/enable background" (click)="hiddenBgClicked($event)">
+      <mat-icon>texture</mat-icon>
+    </div>
+    <div class="op-item">
+      <mat-icon>21mp</mat-icon>
+    </div>
+    <div class="op-item" title="display filter Points by Triangle" (click)="handdleTriangle($event)">
+      <mat-icon>dns</mat-icon>
+    </div>
+  </div>
+  <div class="info">
+    Points: 1000
+  </div>
+</div>
 <div id="echarts" style="width: 600px; height: 600px;"></div>
