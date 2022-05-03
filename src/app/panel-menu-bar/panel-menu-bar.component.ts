@@ -12,19 +12,19 @@ export class PanelMenuBarComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  hiddenBgClicked(e:any){
-    console.log(e)
-    console.log(e.target.classList.contains('actived'))
-    if(e.currentTarget.classList.contains('actived') == true){
-      e.currentTarget.classList.remove('actived')
-      this.scatterPlotVisualizerComponent.renderChart()
-    } else{
-      e.currentTarget.classList.add('actived')
-      // ScatterPlotVisualizerComponent.renderChart()
-      this.scatterPlotVisualizerComponent.renderChart()
-    }
+  // hiddenBgClicked(e:any){
+  //   console.log(e)
+  //   console.log(e.target.classList.contains('actived'))
+  //   if(e.currentTarget.classList.contains('actived') == true){
+  //     e.currentTarget.classList.remove('actived')
+  //     this.scatterPlotVisualizerComponent.renderChart()
+  //   } else{
+  //     e.currentTarget.classList.add('actived')
+  //     // ScatterPlotVisualizerComponent.renderChart()
+  //     this.scatterPlotVisualizerComponent.renderChart()
+  //   }
     
-  }
+  // }
 
 
 }

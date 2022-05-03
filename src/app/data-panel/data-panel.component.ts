@@ -19,7 +19,7 @@ export class DataPanelComponent implements OnInit {
   labelByOptions:Option[] = [
     {value: '0', label: 'label'}
   ]
-  colorBySelected = '0'
+  colorBySelected = '1'
   colorByOptions:Option[] = [
     {value: '0', label: 'No color map'},
     {value: '1', label: 'label 10 color'}

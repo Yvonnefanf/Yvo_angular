@@ -6,17 +6,17 @@
   </mat-form-field>
   <mat-form-field class="project-panel-input" appearance="fill">
     <mat-label>Resolution</mat-label>
-    <input matInput placeholder="Resolution..." value="">
+    <input matInput placeholder="Resolution..." [(ngModel)]="resolution">
   </mat-form-field>
 
   <div class="next-previout-btn">
-    <button mat-raised-button>Previous</button>
-    <button mat-raised-button>Next</button>
+    <button id="preDVIBtn" (click)="goPreResolution()" mat-raised-button>Previous</button>
+    <button id="nextDVIBtn" (click)="goNextResolution()" mat-raised-button>Next</button>
   </div>
   <div class="jump-op">
     <mat-form-field class="iteration-input" appearance="fill">
       <mat-label>Iteration</mat-label>
-      <input matInput placeholder="Iteration..." value="">
+      <input matInput placeholder="Iteration..." [(ngModel)]="iteration">
     </mat-form-field>
     <button mat-raised-button>Jump</button>
   </div>
