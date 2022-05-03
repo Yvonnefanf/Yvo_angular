@@ -121,11 +121,16 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       tooltip: {
         confine: true,
         formatter: function (params: any, tick: any, callback: any) {
-          if (params.dataIndex <= window.dviData.result.lenght - 1) {
-            let label = window.dviData.label_list[params.dataIndex] as any
-            return label
-          } else {
-            return 'background'
+          if(withoutBg == true){
+            return window.dviData.label_list[params.dataIndex]
+          }else{
+            if (params.dataIndex > window.dviData.result.length - 1) {
+              let index = params.dataIndex - window.dviData.grid_index.length
+              let label = window.dviData.label_list[index] as any
+              return label
+            } else {
+              return 'background'
+            }
           }
         }
       },
@@ -198,12 +203,8 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       tooltip: {
         confine: true,
         formatter: function (params: any, tick: any, callback: any) {
-          if (params.dataIndex <= window.dviData.result.lenght - 1) {
             let label = window.dviData.label_list[params.dataIndex] as any
             return label
-          } else {
-            return 'background'
-          }
         }
       },
 
