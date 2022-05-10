@@ -6,7 +6,8 @@ import * as echart from 'echarts';
 declare global {
   interface Window {
     dviData: any,
-    dviIterationList: any[]
+    dviIterationList: any[],
+    selectedPoints: number[]
   }
 }
 @Component({
@@ -30,6 +31,10 @@ export class ScatterPlotVisualizerComponent implements OnInit {
   ngOnInit(): void {
     this.myDemo = echart.init(document.getElementById('echarts') as HTMLDivElement)
     this.updateProjection()
+    window.onresize = () => {
+      //  根据窗口大小调整曲线大小
+      this.myDemo.resize();
+    };
   }
 
   updateProjection(params?: any, callback?: Function) {
@@ -46,7 +51,14 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       predicates = params.predicates || {}
     }
     this.myDemo = echart.init(document.getElementById('echarts') as HTMLDivElement)
-    this.myDemo.showLoading()
+    this.myDemo.resize({ height: null });
+    this.myDemo.showLoading({
+      text: 'loading...',
+      color: '#3f51b5',
+      textColor: '#000',
+      maskColor: 'rgba(255, 255, 255, 0.7)',
+      zlevel: 10,
+    })
     if (window.dviIterationList?.length) {
       let result = window.dviIterationList.findIndex(item => {
         return item.iteration == iteration
@@ -69,8 +81,9 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       headers: headers,
       mode: 'cors'
     }).then(response => response.json()).then((data: any) => {
+      data.iteration = iteration
       window.dviData = data
-      if(!window.dviIterationList){
+      if (!window.dviIterationList) {
         window.dviIterationList = []
       }
       window.dviIterationList.push({
@@ -89,6 +102,36 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       window.dviData.coverBackgroundColor = data.grid_color.concat(data.label_color_list)
       this.renderChart(this.isHiddingBg, callback)
     })
+  }
+  queryByCondition(params: any, fileName: string, searchContent: string, confidenceFrom: number, confidenceTo: number, callback: Function) {
+    if (params?.chart) {
+      this.myDemo = params.chart
+    }
+    let headers = new Headers();
+    let predicates: any = {}
+    predicates[fileName] = searchContent
+    predicates.confidence = [confidenceFrom, confidenceTo]
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    fetch(`http://localhost:5001/query`, {
+      method: 'POST',
+      body: JSON.stringify({
+        "predicates": predicates,
+        "content_path": '/Users/zhangyifan/Downloads/toy_model/resnet18_cifar10',
+        "iteration": window.dviData?.iteration || 1
+      }),
+      headers: headers,
+      mode: 'cors'
+    }).then(response => response.json()).then(data => {
+      console.log('query', data.selectedPoints)
+      window.selectedPoints = data.selectedPoints
+      callback()
+      // this.inspectorPanel.filteredPoints = indices;
+    }).catch(error => {
+      // this.formPointByTriangle(window.selectedPoints)
+      console.log('err123')
+      callback()
+    });
   }
 
   renderChart(withoutBg?: boolean, callback?: Function) {
@@ -121,9 +164,9 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       tooltip: {
         confine: true,
         formatter: function (params: any, tick: any, callback: any) {
-          if(withoutBg == true){
+          if (withoutBg == true) {
             return window.dviData.label_list[params.dataIndex]
-          }else{
+          } else {
             if (params.dataIndex > window.dviData.result.length - 1) {
               let index = params.dataIndex - window.dviData.grid_index.length
               let label = window.dviData.label_list[index] as any
@@ -178,7 +221,15 @@ export class ScatterPlotVisualizerComponent implements OnInit {
     }
   }
 
-  formPointByTriangle() {
+  formPointByTriangle(params?: any) {
+    if (params?.chart) {
+      this.myDemo = params.chart
+    }
+    if (this.myDemo) {
+      this.myDemo = null
+    }
+    this.myDemo = echart.init(document.getElementById('echarts') as HTMLDivElement)
+    let selections = window.selectedPoints
     let data = window.dviData.result
     let colorList = window.dviData.label_color_list
     this.myDemo.setOption({
@@ -203,26 +254,41 @@ export class ScatterPlotVisualizerComponent implements OnInit {
       tooltip: {
         confine: true,
         formatter: function (params: any, tick: any, callback: any) {
-            let label = window.dviData.label_list[params.dataIndex] as any
-            return label
+          let label = window.dviData.label_list[params.dataIndex] as any
+          return label
         }
       },
 
       series: [
         {
           symbolSize: (e: any, params: any) => {
-            console.log('e', e, params)
-            if (params.dataIndex < 5000) {
-              return 10
+            if (selections?.length) {
+              if (selections.indexOf(params.dataIndex) !== -1) {
+                return 10
+              } else {
+                return 5
+              }
             } else {
-              return 5
+              if (params.dataIndex < 5000) {
+                return 10
+              } else {
+                return 5
+              }
             }
           },
           symbol: (e: any, params: any) => {
-            if (params.dataIndex < 5000) {
-              return 'triangle'
+            if (selections?.length) {
+              if (selections.indexOf(params.dataIndex) !== -1) {
+                return 'triangle'
+              } else {
+                return 'cricle'
+              }
             } else {
-              return 'cricle'
+              if (params.dataIndex < 5000) {
+                return 'triangle'
+              } else {
+                return 'cricle'
+              }
             }
           },
           itemStyle: {

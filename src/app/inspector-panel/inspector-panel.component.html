@@ -4,4 +4,29 @@
     <button mat-raised-button>Filter Selection</button>
     <button mat-raised-button>Clear selection</button>
   </div>
+  <div class="search-row">
+    <mat-form-field class="inspector-panel-input" appearance="fill" style="width: 140px;">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Resolution..." [(ngModel)]="searchContent">
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width: 120px; margin-left: 10px;">
+      <mat-label>By</mat-label>
+      <mat-select [(value)]="searchBy">
+        <mat-option *ngFor="let option of searchByOptions" [value]="option.value">
+          {{option.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="search-row">
+    <mat-form-field class="inspector-panel-input" appearance="fill" style="width: 130px;">
+      <mat-label>Confidence From</mat-label>
+      <input matInput placeholder="Resolution..." [(ngModel)]="confidenceFrom">
+    </mat-form-field>
+    <mat-form-field class="inspector-panel-input" appearance="fill" style="width: 130px; margin-left: 10px;">
+      <mat-label>Confidence To</mat-label>
+      <input matInput placeholder="Confidence to..." [(ngModel)]="confidenceTo">
+    </mat-form-field>
+  </div>
+  <button (click)="query()" style="width: 270px; margin-left: 20px;" mat-raised-button color="primary">search</button>
 </div>
